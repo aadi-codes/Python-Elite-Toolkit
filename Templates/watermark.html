@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Watermark the PDF</title>
+  <style>
+    body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #228B22; 
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 500px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+input[type="file"] {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #228B22; 
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+}
+
+input[type="submit"]:hover {
+    background-color: #005b9f;
+}
+
+hr {
+    border-color: #228B22; 
+}
+
+h2 {
+    color: #228B22; 
+}
+
+p a {
+    color: #228B22; 
+    text-decoration: none;
+    border-bottom: 2px solid #228B22; 
+    font-size: 16px;
+}
+
+p a:hover {
+    border-bottom: 2px solid #005b9f;
+}
+
+  </style>
+</head>
+<body>
+    <h1>Watermark your PDF with simple steps</h1>
+    <form action="/watermark" method="POST" enctype="multipart/form-data">
+        <label for="watermark">Select Watermark:</label>
+        <input type="file" id="watermark" name="watermark" required>
+        <br>
+        <label for="input_pdf">Upload Target PDF:</label>
+        <input type="file" id="input_pdf" name="input_pdf" required>
+        <br>
+        <input type="submit" value="Apply Watermark">
+    </form>
+
+    {% if watermarked_pdf %}
+    <hr>
+    <h2>Watermarked PDF:</h2>
+    <!-- 'show download' section -->
+    <p><a href="{{ watermarked_pdf }}" download="watermarked_pdf.pdf">Download Watermarked PDF</a></p>
+    <!-- End of 'show download' section -->
+    {% endif %}
+</body>
+</html>

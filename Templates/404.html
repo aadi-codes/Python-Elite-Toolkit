@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <style>
+        body {
+            background-color: #ff6b6b; /* Bright red background color */
+            text-align: center;
+            font-family: Arial, sans-serif;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #fff; /* White text color */
+            font-size: 4rem;
+        }
+
+        p {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #3498db; /* Bright blue link color */
+            text-decoration: none;
+            font-weight: bold;
+            position: relative; /* Add relative positioning */
+        }
+
+        /* Add the underline pseudo-element to the link */
+        a::before {
+            content: ''; /* Required for pseudo-elements */
+            position: absolute;
+            left: 0;
+            bottom: -3px; /* Adjust the position to your liking */
+            width: 100%; /* Extend the underline to full width */
+            height: 2px; /* Set the height of the underline */
+            background-color: #894bda; /* Color of the underline */
+            transform: scaleX(0); /* Initially, the underline is not visible */
+            transform-origin: bottom right; /* The transformation origin is set to the bottom right */
+            transition: transform 0.4s ease; /* Add a smooth transition */
+        }
+
+        /* Apply the hover effect to the pseudo-element */
+        a:hover::before {
+            transform: scaleX(1); /* Scale the underline to full width on hover */
+            transform-origin: bottom left; /* Change the transformation origin for a smooth effect */
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white container */
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .highlight {
+            color: #894bda; /* Bright purple color */
+        }
+    </style>
+</head>
+<body>
+    <h1>404 - Page Not Found</h1>
+    <p>Oops! We're sorry, but the page you're looking for doesn't exist.</p>
+    <div class="container">
+        <p>Go back to <a class="highlight" href="/">Homepage</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Merge PDFs</title>
+ <style>
+    body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
+    padding:40px;
+}
+
+h1 {
+    color: #007acc;
+}
+
+form {
+    background-color: #ffffff90;
+    padding: 30px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 50%;
+    font-size: 30px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15);
+}
+
+input[type="file"] {
+    background-color: #f5f5f5;
+    border: 1px solid #aaa9a9;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    background-color: #007acc;
+    font-size: 20px;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #005b9f;
+}
+
+hr {
+    border-color: #007acc;
+}
+
+h2 {
+    color: #007acc;
+}
+
+p a {
+    color: #007acc;
+    text-decoration: none;
+    border-bottom: 2px solid #007acc;
+}
+
+p a:hover {
+    border-bottom: 2px solid #005b9f;
+}
+
+ </style>
+</head>
+<body>
+    <h1>Merge your PDF with help of this simple Tool</h1>
+    <form action="/merge" method="POST" enctype="multipart/form-data">
+        <label for="pdfs">Upload all your PDF Files:</label>
+        <input type="file" id="pdfs" name="pdfs" placeholder="Upload" multiple>
+        <br>
+        <input type="submit" value="Merge PDFs">
+    </form>
+
+    {% if merged_pdf %}
+    <hr>
+    <h2>Merged PDF:</h2>
+    <p><a href="{{ merged_pdf }}" download="merged_pdf.pdf">Download Merged PDF</a></p>
+    {% endif %}
+</body>
+</html>

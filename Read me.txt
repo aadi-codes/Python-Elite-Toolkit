@@ -1,0 +1,23 @@
+
+#Python Tools
+
+- Python Tools
+- Utilizing various libraries, including PIL, Flask, PyPdf2, and more.
+- Creation of tools such as an image editor, PDF merger, PDF watermarking, and ongoing development projects encompassing watchdog, SQLite, Pickle, CSV, and Pandas integration.
+- Integration of tools into web applications, bridging webpages and Python code seamlessly using the Flask framework.
+- Implementation of a custom 404 error page for improved user experience.
+
+
+The integration of these tools has resulted in the creation of web applications, seamlessly merging the functionality of webpages with Python code, all orchestrated through the Flask framework. Additionally, a custom 404 error page has been thoughtfully designed to enhance user experience.
+
+
+
+#How to Run
+
+To initiate these Python tools, kindly follow these steps:
+
+1. Open your terminal within the project folder.
+2. Execute the `app.py` file by entering the following command in your terminal: python app.py
+  
+
+- Alternatively, if you have multiple Python versions installed, consider using: python5 app.py

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Editor</title>
+    <style>
+        body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #800000;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 500px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+input[type="file"],
+select {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #800000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+}
+
+input[type="submit"]:hover {
+    background-color: #660000;
+}
+
+hr {
+    border-color: #800000;
+}
+
+h2 {
+    color: #800000;
+}
+
+p a {
+    color: #800000;
+    text-decoration: none;
+    border-bottom: 2px solid #800000;
+    font-size: 16px;
+}
+
+p a:hover {
+    border-bottom: 2px solid #660000;
+}
+
+    </style>
+</head>
+
+<body>
+    <h1>Edit your image in diffrent ways</h1>
+    <form action="/image_editor" method="POST" enctype="multipart/form-data">
+        <label for="image_file">Select an image:</label>
+        <input type="file" name="image_file" required><br>
+        <label for="operation">Select operation:</label>
+        <select name="operation" required>
+            <option value="resize">Resize</option>
+            <option value="rotate">Rotate</option>
+            <option value="sharpen">Sharpen</option>
+            <option value="enhance_brightness">Enhance Brightness</option>
+            <option value="enhance_contrast">Enhance Contrast</option>
+            <option value="grayscale">Convert to Grayscale</option>
+            <option value="flip_horizontal">Flip Horizontal</option>
+            <option value="flip_vertical">Flip Vertical</option>
+        </select><br>
+        <input type="submit" value="Apply Operation">
+    </form>
+    {% if edited_image %}
+    <hr>
+    <h2>Edited Image:</h2>
+    <p><a href="{{ edited_image }}" download="edited_image.png">Download Edited Image</a></p>
+    {% endif %}
+</body>
+</html>
