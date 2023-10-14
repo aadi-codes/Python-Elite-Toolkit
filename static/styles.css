@@ -1,0 +1,253 @@
+body {
+    font-family: 'Helvetica', sans-serif;
+    background: #eff7ff;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    font-size: medium;
+}
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* navbar start here */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f5f5f5;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 95%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.logo img {
+    width: 50px;
+    height: auto;
+}
+
+.name {
+    font-size: 24px;
+    color: #333;
+    margin-left: 10px;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+
+.features a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.features a:hover {
+    color: tomato;
+}
+
+.nav_right {
+    display: flex;
+}
+
+#download a {
+    background: tomato;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+#download a:hover {
+    background: #ff7f7f;
+}
+
+#signin a {
+    text-decoration: none;
+    color: tomato;
+    margin: 0 10px;
+    font-weight: bold;
+}
+
+#signin a:hover {
+    text-decoration: underline;
+}
+
+
+/* about section start here */
+.container_about {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #F6F8FA;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    width: 95%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.about-content {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+    font-size: 1.3em;
+}
+
+.about h2 {
+    font-size: 28px;
+    color: #333333;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: underline;
+}
+
+#simple_highlight {
+    color: tomato;
+    font-weight: bold;
+    display: inline;
+}
+
+.about p {
+    font-size: 20px;
+    color: #333333;
+    text-align: center;
+}
+
+.about-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-image img {
+    max-width: 100%;
+    max-height: 100%;
+    border: 2px solid tomato;
+    border-radius: 10px;
+}
+
+
+
+/* function section start here */
+#functions {
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #F6F8FA;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    width: 95%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.container_function {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: #F6F8FA;
+    padding: 20px;
+    min-height: 30vh;
+    width: 100%;
+}
+
+.section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: #F6F8FA;
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.box {
+    width: 10em;
+    height: 10em;
+    background-color: #E0E6E9;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    text-decoration: none;
+    color: #333333;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    position: relative;
+}
+
+.box::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: tomato;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: -1;
+    border-radius: 10px;
+}
+
+.box:hover::before {
+    opacity: 0.8;
+}
+
+.box:hover {
+    background-color: #ffffff;
+    transform: scale(1.05);
+}
+
+.pdf-section {
+    background: #FDE2E4;
+}
+
+.image-section {
+    background: #FEF3E0;
+}
+
+
+/* responsive */
+@media (max-width: 768px) {
+    /* CSS for screens with a maximum width of 768px */
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .logo, .features, .nav_right {
+        width: 100%;
+        margin: 10px 0;
+    }
+    .name {
+        margin: 10px 0;
+    }
+}

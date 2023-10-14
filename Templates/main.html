@@ -3,97 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tools</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #fff243, #4350FF);
-            background-position: center bottom;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        h1 {
-            font-size: 36px;
-            color: #333333;
-            font-family: 'Verdana', sans-serif;
-            text-decoration: underline;
-        }
-
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .box {
-            width: 200px;
-            height: 200px;
-            margin: 20px;
-            background-color: #ff9f43;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-weight: bold;
-            font-size: 22px;
-            text-decoration: none;
-            color: #ffffff;
-            transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
-            position: relative;
-        }
-
-        .box::before {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, #e74c3c, #e91e63);
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-            z-index: -1;
-        }
-
-        .box:hover::before {
-            opacity: 1;
-        }
-
-        .box:hover {
-            background-color: #ff6b6b;
-            transform: scale(1.05);
-        }
-
-        .row {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-    </style>
+    <title>Elite Toolkit</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" type="image/x-icon" href="/static/Favicon.ico">
 </head>
 <body>
-    <h1>Python Basic Tools</h1>
-    <div class="container">
-        <div class="row">
-            <a class="box" href="/merge">Merge PDF</a>
-            <a class="box" href="/watermark">Watermark PDF</a>
-            <a class="box" href="/image_editor">Edit Image</a>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='PyEliteToolkit.png') }}" alt="Logo">
+            <span class="name">Python Elite Toolkit</span>
         </div>
-        <div class="row">
-            <a class="box" href="/tool4">Tool 4</a>
-            <a class="box" href="/tool5">Tool 5</a>
+        <div class="features">
+            <a href="#functions">Functions</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#business">Business</a>
+            <a href="#support">Support</a>
+            <a href="/store_feedback">Feedback</a>
+        </div>
+        <div class="nav_right">
+            <div id="download">
+                <a href="#download">Download App</a>
+            </div>
+            <div id="signin">
+                <a href="#signin">Sign In</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container_about">
+        <div class="about-content">
+            <h2>Powerful Tools Made <span id="simple_highlight">Simple.</span></h2>
+            <p>
+                Our Elite Toolkit has been meticulously crafted with your needs at the forefront. Bid farewell to convoluted software and extend a warm welcome to effortlessly accessible PDF utilities. Refine, unite, transmute, condense, endorse, and safeguard your documents with elegance, all with just a few graceful clicks. Elevate your work to a realm of beauty and simplicity.
+            </p>
+        </div>
+        <div class="about-image">
+            <img src="{{ url_for('static', filename='about_image.jpg') }}" alt="about_image">
         </div>
     </div>
+    
+    
+    <div id="functions">
+        <h2>Essential tools at your Fingertips</h2>
+        <div class="container_function">
+            <div class="section pdf-section">
+                 <div class="row">
+                    <a class="box" href="/merge">Merge PDF</a>
+                    <a class="box" href="/watermark">Watermark PDF</a>
+                    <a class="box" href="/pdf_split">Split PDF</a>
+                    <a class="box" href="/compress">Compress File</a>
+                </div>
+            </div>
+            
+            <div class="section image-section">
+                <div class="row">
+                    <a class="box" href="/image_editor">Edit Image</a>
+                    <a class="box" href="/perform_ocr">OCR</a>
+                    <a class="box" href="/crop_image">Crop Image</a>
+                    <a class="box" href="/convert_to_png">Convert to PNG</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>
