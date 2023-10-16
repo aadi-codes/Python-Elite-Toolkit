@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Image Editor</title>
+    <title>OCR</title>
     <style>
         body {
             background-color: #eff7ff;
@@ -23,7 +23,7 @@
         }
 
         h1 {
-            color: #800000;
+            color: #800000; /* Changed color to maroon */
         }
 
         .container {
@@ -36,7 +36,7 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             margin: 20px;
             width: 95%;
-            min-height: 60vh;
+            height: 60vh;
             font-family: 'Roboto', sans-serif;
         }
 
@@ -67,14 +67,15 @@
             max-width: 100%;
             height: auto;
             max-width: 45%;
-            border: 4px solid tomato;
+            border: 4px solid tomato; /* Add a 4px tomato-colored border */
             border-radius: 4px;
         }
 
-
         label {
+            display: block;
+            margin-bottom: 10px;
             font-size: 18px;
-            color: #333333;
+            color: #333;
         }
 
         input[type="file"] {
@@ -119,58 +120,67 @@
         }
 
         hr {
-            border-color: #800000;
+            border-color: #228B22;
         }
 
         h2 {
-            color: #800000;
+            color: #228B22;
         }
 
         p a {
-            color: #800000;
+            color: #228B22;
             text-decoration: none;
-            border-bottom: 2px solid #800000;
+            border-bottom: 2px solid #228B22;
             font-size: 16px;
         }
 
         p a:hover {
             border-bottom: 2px solid #005b9f;
         }
+
+        .ocr-results {
+            padding: 20px;
+            border: 2px solid #800000; /* Add a 2px maroon border */
+            border-radius: 5px;
+            text-align: left;
+            background: #fff;
+            font-size: 16px;
+            margin: 20px auto;
+            max-width: 80%;
+        }
+
     </style>
 </head>
 <body>
-    <!-- navbar -->
+    <!-- navbar  -->
     {% include "navbar.html" %}
+
 
     <div class="container">
         <div class="left-section">
-            <h1>Edit your Image</h1>
-            <form action="/image_editor" method="POST" enctype="multipart/form-data">
+            <h1>Perform OCR on Your Image</h1>
+            <form action="/perform_ocr" method="POST" enctype="multipart/form-data">
                 <label for="image_file">Upload Image:</label>
                 <input type="file" id="image_file" name="image_file" required>
-                
-                    <div>
-                        <label for="operation">Choose an Operation:</label>
-                        <select id="operation" name="operation" required>
-                            <option value="resize">Resize</option>
-                            <option value="rotate">Rotate</option>
-                            <option value="sharpen">Sharpen</option>
-                            <option value="brightness">Enhance Brightness</option>
-                        </select>
-                    </div>
                 <br>
-                <input type="submit" value="Apply">
+                <label for="language">Select Language (optional):</label>
+                <input type="text" id="language" name="language">
+                <br>
+                <label for="threshold">Threshold (optional):</label>
+                <input type="text" id="threshold" name="threshold">
+                <br>
+                <label for="segmentation_mode">Page Segmentation Mode (optional):</label>
+                <input type="text" id="segmentation_mode" name="segmentation_mode">
+                <br>
+                <input type="submit" value="Perform OCR">
             </form>
         </div>
         <div class="right-section">
-            <img src="path_to_your_image.jpg" alt="Sample Image">
+            <!-- Display the OCR result here -->
+            <h2>OCR Result:</h2>
+            <p>{{ ocr_result }}</p>
         </div>
     </div>
-
-    {% if edited_image %}
-    <hr>
-    <h2>Edited Image:</h2>
-    <p><a href="{{ edited_image }}" download="edited_image.png">Download Edited Image</a></p>
-    {% endif %}
 </body>
 </html>
+

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Image Editor</title>
+    <title>Split PDF</title>
     <style>
         body {
             background-color: #eff7ff;
@@ -15,15 +15,14 @@
             align-items: center;
         }
 
-        /* Reset default styles */
+    /* Reset default styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         h1 {
-            color: #800000;
+            color: #228B22;
         }
 
         .container {
@@ -36,17 +35,17 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             margin: 20px;
             width: 95%;
-            min-height: 60vh;
-            font-family: 'Roboto', sans-serif;
+            height: 60vh;
+            font-family: 'Roboto', sans-serif; 
         }
 
         .left-section {
             flex: 1;
             padding: 10px;
             text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: #333333;
+            font-size: 24px; 
+            font-weight: bold; 
+            color: #333333; 
         }
 
         .right-section {
@@ -67,14 +66,15 @@
             max-width: 100%;
             height: auto;
             max-width: 45%;
-            border: 4px solid tomato;
-            border-radius: 4px;
+            border: 4px solid tomato; /* Add a 4px tomato-colored border */
+            border-radius: 4px; 
         }
 
-
         label {
+            display: block;
+            margin-bottom: 10px;
             font-size: 18px;
-            color: #333333;
+            color: #333;
         }
 
         input[type="file"] {
@@ -119,17 +119,17 @@
         }
 
         hr {
-            border-color: #800000;
+            border-color: #228B22;
         }
 
         h2 {
-            color: #800000;
+            color: #228B22;
         }
 
         p a {
-            color: #800000;
+            color: #228B22;
             text-decoration: none;
-            border-bottom: 2px solid #800000;
+            border-bottom: 2px solid #228B22;
             font-size: 16px;
         }
 
@@ -139,27 +139,20 @@
     </style>
 </head>
 <body>
-    <!-- navbar -->
+    <!-- navbar  -->
     {% include "navbar.html" %}
 
     <div class="container">
         <div class="left-section">
-            <h1>Edit your Image</h1>
-            <form action="/image_editor" method="POST" enctype="multipart/form-data">
-                <label for="image_file">Upload Image:</label>
-                <input type="file" id="image_file" name="image_file" required>
-                
-                    <div>
-                        <label for="operation">Choose an Operation:</label>
-                        <select id="operation" name="operation" required>
-                            <option value="resize">Resize</option>
-                            <option value="rotate">Rotate</option>
-                            <option value="sharpen">Sharpen</option>
-                            <option value="brightness">Enhance Brightness</option>
-                        </select>
-                    </div>
+            <h1>Split your PDF <br> </h1>
+            <form action="/split_pdf" method="POST" enctype="multipart/form-data">
+                <label for="pdf_file">Upload PDF:</label>
+                <input type="file" id="pdf_file" name="pdf_file" required>
                 <br>
-                <input type="submit" value="Apply">
+                <label for="page_range">Enter Page Range (e.g., 1-5):</label>
+                <input type="text" id="page_range" name="page_range" required>
+                <br>
+                <input type="submit" value="Split PDF">
             </form>
         </div>
         <div class="right-section">
@@ -167,10 +160,12 @@
         </div>
     </div>
 
-    {% if edited_image %}
+    {% if split_output %}
     <hr>
-    <h2>Edited Image:</h2>
-    <p><a href="{{ edited_image }}" download="edited_image.png">Download Edited Image</a></p>
+    <h2>Split PDF Pages:</h2>
+    <!-- 'show download' section -->
+    <p><a href="{{ split_output }}" download="split_pdf.pdf">Download Split PDF</a></p>
+    <!-- End of 'show download' section -->
     {% endif %}
 </body>
 </html>

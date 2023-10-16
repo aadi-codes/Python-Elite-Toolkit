@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Image Editor</title>
+    <title>File Compression</title>
     <style>
         body {
-            background-color: #eff7ff;
             font-family: 'Helvetica', sans-serif;
+            background: #eff7ff;
             padding: 0;
             margin: 0;
             font-size: medium;
@@ -22,10 +22,6 @@
             box-sizing: border-box;
         }
 
-        h1 {
-            color: #800000;
-        }
-
         .container {
             display: flex;
             justify-content: space-between;
@@ -36,13 +32,12 @@
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
             margin: 20px;
             width: 95%;
-            min-height: 60vh;
+            height: 60vh;
             font-family: 'Roboto', sans-serif;
         }
 
         .left-section {
             flex: 1;
-            padding: 10px;
             text-align: center;
             font-size: 24px;
             font-weight: bold;
@@ -51,7 +46,6 @@
 
         .right-section {
             flex: 1;
-            padding: 10px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -71,106 +65,68 @@
             border-radius: 4px;
         }
 
-
         label {
-            font-size: 18px;
+            font-size: 20px;
             color: #333333;
+        }
+
+        #form_h2 {
+            font-size: 22px;
+            color: tomato;
         }
 
         input[type="file"] {
             background-color: #f5f5f5;
-            border: 1px solid #ccc;
-            color: #333;
+            border: 1px solid #aaa9a9;
+            color: #333333;
             padding: 10px;
             border-radius: 5px;
             width: 100%;
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-
-        input[type="text"] {
-            background-color: #f5f5f5;
-            border: 1px solid #ccc;
-            color: #333;
-            padding: 10px;
-            border-radius: 5px;
-            width: 100%;
-            margin-bottom: 20px;
-            font-size: 16px;
+            margin-bottom: 10px;
         }
 
         input[type="submit"] {
-            background-color: #228B22;
+            background-color: #007acc;
+            font-size: 20px;
             color: #fff;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            font-size: 18px;
         }
 
         input[type="submit"]:hover {
             background-color: #005b9f;
         }
-
-        img {
-            max-width: 100%;
-        }
-
-        hr {
-            border-color: #800000;
-        }
-
-        h2 {
-            color: #800000;
-        }
-
-        p a {
-            color: #800000;
-            text-decoration: none;
-            border-bottom: 2px solid #800000;
-            font-size: 16px;
-        }
-
-        p a:hover {
-            border-bottom: 2px solid #005b9f;
-        }
     </style>
 </head>
 <body>
-    <!-- navbar -->
+    <!-- Navbar -->
     {% include "navbar.html" %}
 
     <div class="container">
         <div class="left-section">
-            <h1>Edit your Image</h1>
-            <form action="/image_editor" method="POST" enctype="multipart/form-data">
-                <label for="image_file">Upload Image:</label>
-                <input type="file" id="image_file" name="image_file" required>
-                
-                    <div>
-                        <label for="operation">Choose an Operation:</label>
-                        <select id="operation" name="operation" required>
-                            <option value="resize">Resize</option>
-                            <option value="rotate">Rotate</option>
-                            <option value="sharpen">Sharpen</option>
-                            <option value="brightness">Enhance Brightness</option>
-                        </select>
-                    </div>
+            <h1>Compress your File here</h1>
+            <form action="/compress" method="POST" enctype="multipart/form-data">
+                <label id="form_h2" for="file">Select File to Compress:</label>
+                <input type="file" id="file" name="file" required>
                 <br>
-                <input type="submit" value="Apply">
+                <br>        
+                <label for="compression_level">Select Compression Level:</label>
+                <select id="compression_level" name="compression_level" required>
+                    <option value="1">Low</option>
+                    <option value="2">Medium</option>
+                    <option value="3">High</option>
+                </select>
+                <br>
+                <br>
+                <input type="submit" value="Compress File">
             </form>
         </div>
         <div class="right-section">
-            <img src="path_to_your_image.jpg" alt="Sample Image">
+            <img src="your-image.jpg" alt="example image">
         </div>
     </div>
-
-    {% if edited_image %}
-    <hr>
-    <h2>Edited Image:</h2>
-    <p><a href="{{ edited_image }}" download="edited_image.png">Download Edited Image</a></p>
-    {% endif %}
 </body>
 </html>
