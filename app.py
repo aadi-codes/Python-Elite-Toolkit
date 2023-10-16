@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 
 # Import custom modules from the "Modules" folder
-from Modules import merge_pdfs, watermark_pdfs, image_editor, split_pdf, file_compression, ocr, file_conversion, image_cropping, feedback_support
+from Modules import merge_pdfs, watermark_pdfs, image_editor, split_pdf, file_compression, perform_ocr, crop_image, file_conversion, feedback_support
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -203,90 +203,83 @@ def perform_ocr_route():
                 image_path = os.path.join('uploads', image_file.filename)
                 image_file.save(image_path)
 
+                # Get optional parameters from the form
                 language = request.form.get('language', 'eng')
                 threshold = int(request.form.get('threshold', 128))
                 segmentation_mode = int(
                     request.form.get('segmentation_mode', 6))
 
-                text = perform_ocr(image_path, language,
-                                   threshold, segmentation_mode)
+                # Perform OCR here and store the result in the 'ocr_result' variable
+                ocr_result = perform_ocr(
+                    image_path, language, threshold, segmentation_mode)
 
-                return render_template('ocr.html', ocr_result=text)
+                return render_template('ocr.html', ocr_result=ocr_result)
 
     return render_template('ocr.html', ocr_result=None)
 
 
-# image Conversion route
-@app.route('/convert_to_png', methods=['POST'])
-def convert_to_png_route():
-    if 'input_file' in request.files:
-        input_file = request.files['input_file']
-        if input_file.filename != '':
-            output_file_path = os.path.join('downloads', 'converted_image.png')
-
-            # Call the conversion function
-            success = file_conversion.convert_to_png(
-                input_file, output_file_path)
-
-            if success:
-                return send_from_directory('downloads', 'converted_image.png')
-            else:
-                return "Conversion failed", 400
-
-# Undo Route
-
-
-@app.route('/undo', methods=['POST'])
-def undo_route():
-    # Call the undo function
-    undo_success = undo_redo.perform_undo()
-
-    if undo_success:
-        return "Undo successful"
-    else:
-        return "Undo failed", 400
-
-# Redo Route
-
-
-@app.route('/redo', methods=['POST'])
-def redo_route():
-    # Call the redo function
-    redo_success = undo_redo.perform_redo()
-
-    if redo_success:
-        return "Redo successful"
-    else:
-        return "Redo failed", 400
-
-# Image Cropping Route
-
-
-@app.route('/crop_image', methods=['POST'])
+# Image Cropping route
+@app.route('/crop_image', methods=['GET', 'POST'])
 def crop_image_route():
+    if 'image_file' in request.files:
+        input_file = request.files['image_file']
+        if input_file.filename != '':
+            # Save the uploaded image
+            input_path = os.path.join(
+                app.config['UPLOAD_FOLDER'], input_file.filename)
+            input_file.save(input_path)
+
+            x = int(request.form.get('x', 0))
+            y = int(request.form.get('y', 0))
+            width = int(request.form.get('width', 0))
+            height = int(request.form.get('height', 0))
+
+            coordinates = (x, y, x + width, y + height)
+
+            output_path = os.path.join(
+                app.config['UPLOAD_FOLDER'], 'cropped_' + input_file.filename)
+
+            if crop_image.crop_image(input_path, output_path, coordinates):
+                return send_file(output_path, as_attachment=True)
+
+    # If cropping is not successful or there is no image uploaded, it will reach here
+    return render_template('crop_image.html', cropping_result='Cropping failed')
+
+
+# File Conversion route
+@app.route('/convert_file', methods=['POST', 'GET'])
+def convert_file_route():
     if 'input_file' in request.files:
         input_file = request.files['input_file']
         if input_file.filename != '':
-            output_file_path = os.path.join('downloads', 'cropped_image.png')
+            # Save the uploaded file
+            input_path = os.path.join(
+                app.config['UPLOAD_FOLDER'], input_file.filename)
+            input_file.save(input_path)
 
-            # Get cropping coordinates from the form
-            x1 = int(request.form['x1'])
-            y1 = int(request.form['y1'])
-            x2 = int(request.form['x2'])
-            y2 = int(request.form['y2'])
+            # Get the selected input and output formats from the form
+            input_format = request.form.get('input_format', 'png')
+            output_format = request.form.get('output_format', 'png')
 
-            # Call the cropping function
-            success = image_cropping.crop_image(
-                input_file, output_file_path, (x1, y1, x2, y2))
+            # Generate the output filename with the selected output format
+            output_filename = f'converted_file.{output_format}'
+
+            # Set the output file path
+            output_path = os.path.join(
+                app.config['UPLOAD_FOLDER'], output_filename)
+
+            # Call the conversion function from the file_conversion module
+            success = file_conversion.convert_file(
+                input_path, output_path, input_format, output_format)
 
             if success:
-                return send_from_directory('downloads', 'cropped_image.png')
-            else:
-                return "Cropping failed", 400
+                return send_file(output_path, as_attachment=True)
+
+    # If conversion is not successful or there is no file uploaded, it will reach here
+    return render_template('conversion.html', conversion_result='Conversion failed')
+
 
 # Feedback Route
-
-
 @app.route('/store_feedback', methods=['POST'])
 def store_feedback_route():
     feedback = request.form['feedback']

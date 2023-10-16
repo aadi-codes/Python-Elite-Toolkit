@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>OCR</title>
+    <title>Image Cropping</title>
     <style>
         body {
             background-color: #eff7ff;
@@ -87,11 +86,10 @@
             border-radius: 5px;
             width: 100%;
             margin-bottom: 20px;
-            font-size: 20px; /* Increased font size */
-            color: tomato; /* Tomato color */
+            font-size: 16px;
         }
 
-        input[type="text"], select {
+        input[type="text"] {
             background-color: #f5f5f5;
             border: 1px solid #ccc;
             color: #333;
@@ -140,8 +138,8 @@
             border-bottom: 2px solid #005b9f;
         }
 
-        .ocr-results {
-            padding: 20px;
+        .cropped-image {
+            max-width: 100%;
             border: 2px solid #800000; /* Add a 2px maroon border */
             border-radius: 5px;
             text-align: left;
@@ -151,51 +149,50 @@
             max-width: 80%;
         }
 
+        .label_table input[type="text"],.label_table label {
+             width: 100px;
+        }
+
+
     </style>
 </head>
-
 <body>
     <!-- navbar -->
     {% include "navbar.html" %}
     <div class="container">
         <div class="left-section">
-            <h1>Perform OCR on Image</h1>
-            <form action="/perform_ocr" method="POST" enctype="multipart/form-data">
+            <h1>Crop an Image</h1>
+            <form action="/crop_image" method="POST" enctype="multipart/form-data">
                 <label for="image_file">Upload Image:</label>
                 <input type="file" id="image_file" name="image_file" required>
                 <br>
-                <label for="language">Language :</label>
-                <select id="language" name="language">
-                    <option value="eng">English</option>
-                    <option value="spa">Spanish</option>
-                </select>
-                <br>
-                <label for="threshold">Threshold:</label>
-                <select id="threshold" name="threshold">
-                    <option value="128">Default (128)</option>
-                    <option value="100">Custom Threshold 1 (100)</option>
-                    <option value="150">Custom Threshold 2 (150)</option>
-                </select>
-                <br>
-                <label for="segmentation_mode">Segmentation :</label>
-                <select id="segmentation_mode" name="segmentation_mode">
-                    <option value="6">Automatic (6)</option>
-                    <option value="8">Single Block (8)</option>
-                    <option value="10">Single Line (10)</option>
-                </select>
-                <br>
-                <input type="submit" value="Perform OCR">
+                <div class="label_table">
+                    <table>
+                        <tr>
+                            <td><label for="x">X coordinate:</label></td>
+                            <td><input type="text" id="x" name="x" required></td>
+                            <td><label for="y">Y coordinate:</label></td>
+                            <td><input type="text" id="y" name="y" required></td>
+                        </tr>
+                        <tr>
+                            <td><label for="width">Width:</label></td>
+                            <td><input type="text" id="width" name="width" required></td>
+                            <td><label for="height">Height:</label></td>
+                            <td><input type="text" id="height" name="height" required></td>
+                        </tr>
+                    </table>
+                </div>                
+                <input type="submit" value="Crop Image">
             </form>
         </div>
         <div class="right-section">
             <img src="your-image.jpg" alt="example image">
         </div>
     </div>
-    {% if ocr_result %}
+    {% if cropped_image %}
     <hr>
-    <h2>OCR Result:</h2>
-    <p>{{ ocr_result }}</p>
+    <h2>Cropped Image:</h2>
+    <img src="{{ cropped_image }}" alt="Cropped Image" class="cropped-image">
     {% endif %}
 </body>
-
 </html>

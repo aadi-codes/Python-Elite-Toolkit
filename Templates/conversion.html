@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>OCR</title>
+    <title>File Conversion</title>
     <style>
         body {
             background-color: #eff7ff;
@@ -87,11 +86,10 @@
             border-radius: 5px;
             width: 100%;
             margin-bottom: 20px;
-            font-size: 20px; /* Increased font size */
-            color: tomato; /* Tomato color */
+            font-size: 16px;
         }
 
-        input[type="text"], select {
+        select {
             background-color: #f5f5f5;
             border: 1px solid #ccc;
             color: #333;
@@ -139,63 +137,38 @@
         p a:hover {
             border-bottom: 2px solid #005b9f;
         }
-
-        .ocr-results {
-            padding: 20px;
-            border: 2px solid #800000; /* Add a 2px maroon border */
-            border-radius: 5px;
-            text-align: left;
-            background: #fff;
-            font-size: 16px;
-            margin: 20px auto;
-            max-width: 80%;
-        }
-
     </style>
 </head>
-
 <body>
     <!-- navbar -->
     {% include "navbar.html" %}
     <div class="container">
         <div class="left-section">
-            <h1>Perform OCR on Image</h1>
-            <form action="/perform_ocr" method="POST" enctype="multipart/form-data">
-                <label for="image_file">Upload Image:</label>
-                <input type="file" id="image_file" name="image_file" required>
+            <h1>File Conversion</h1>
+            <form action="/convert_file" method="POST" enctype="multipart/form-data">
+                <label for="input_file">Upload File:</label>
+                <input type="file" id="input_file" name="input_file" required>
                 <br>
-                <label for="language">Language :</label>
-                <select id="language" name="language">
-                    <option value="eng">English</option>
-                    <option value="spa">Spanish</option>
+                <label for="input_format">Input Format:</label>
+                <select id="input_format" name="input_format">
+                    <option value="png">PNG</option>
+                    <option value="jpeg">JPEG</option>
+                    <option value="gif">GIF</option>
                 </select>
                 <br>
-                <label for="threshold">Threshold:</label>
-                <select id="threshold" name="threshold">
-                    <option value="128">Default (128)</option>
-                    <option value="100">Custom Threshold 1 (100)</option>
-                    <option value="150">Custom Threshold 2 (150)</option>
+                <label for="output_format">Output Format:</label>
+                <select id="output_format" name="output_format">
+                    <option value="png">PNG</option>
+                    <option value="jpeg">JPEG</option>
+                    <option value="gif">GIF</option>
                 </select>
                 <br>
-                <label for="segmentation_mode">Segmentation :</label>
-                <select id="segmentation_mode" name="segmentation_mode">
-                    <option value="6">Automatic (6)</option>
-                    <option value="8">Single Block (8)</option>
-                    <option value="10">Single Line (10)</option>
-                </select>
-                <br>
-                <input type="submit" value="Perform OCR">
+                <input type="submit" value="Convert File">
             </form>
         </div>
         <div class="right-section">
             <img src="your-image.jpg" alt="example image">
         </div>
     </div>
-    {% if ocr_result %}
-    <hr>
-    <h2>OCR Result:</h2>
-    <p>{{ ocr_result }}</p>
-    {% endif %}
 </body>
-
 </html>

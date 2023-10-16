@@ -1,4 +1,3 @@
-# image_cropping.py
 from PIL import Image
 
 
