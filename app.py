@@ -1,15 +1,15 @@
-from flask import Flask, request, render_template, send_file, url_for, send_from_directory, jsonify
+from flask import Flask, request, render_template, send_file, url_for, jsonify
 from werkzeug.utils import secure_filename
 import os
 
-# Import custom modules from the "Modules" folder
+# imported custom modules
 from Modules import merge_pdfs, watermark_pdfs, image_editor, split_pdf, file_compression, perform_ocr, crop_image, file_conversion, feedback_support
 
 app = Flask(__name__)
 app.static_folder = 'static'
 
 
-# Create directories if they don't exist
+# create directories if they don't exist
 if not os.path.exists('uploads'):
     os.makedirs('uploads')
 if not os.path.exists('downloads'):
@@ -20,9 +20,8 @@ if not os.path.exists('downloads'):
 def main():
     return render_template('main.html')
 
-# this is the route to function on main page in navbar
 
-
+# link to function section from navbar
 @app.route('/functions')
 def functions():
     return render_template('main.html')
@@ -45,7 +44,6 @@ def merge_pdfs_route():
 
         return render_template('merge.html', merged_pdf=merged_pdf)
 
-    # If it's a GET request, render the merge.html template
     return render_template('merge.html', merged_pdf=None)
 
 
@@ -95,7 +93,7 @@ def pdf_split_route():
                 pdf_path = os.path.join('uploads', filename)
                 pdf_file.save(pdf_path)
 
-                # Call the split_pdf function to split the PDF
+                # calling split_pdf function
                 output_path = split_pdf(pdf_path, page_range)
 
                 if output_path:
@@ -117,15 +115,15 @@ def compress_file_route():
             file_path = os.path.join('uploads', file.filename)
             file.save(file_path)
 
-            # Get the compression level from the form
+            # Get compression level
             compression_level = int(request.form['compression_level'])
 
-            # Call the compression function from the file_compression module
+            # Call the compression function
             compressed_file = file_compression.compress(
                 file_path, compression_level)
 
             if compressed_file:
-                # Provide the compressed file to the template
+                # Provide the compressed file
                 return send_file(compressed_file, as_attachment=True)
 
     return render_template('compress.html')
@@ -192,7 +190,7 @@ def image_editor_route():
     return render_template('image_editor.html', edited_image=None)
 
 
-# OCR (Optical Character Recognition) route
+# OCR route (Optical Character Recognition)
 @app.route('/perform_ocr', methods=['GET', 'POST'])
 def perform_ocr_route():
     if request.method == 'POST':
@@ -203,13 +201,13 @@ def perform_ocr_route():
                 image_path = os.path.join('uploads', image_file.filename)
                 image_file.save(image_path)
 
-                # Get optional parameters from the form
+                # get optional parameters
                 language = request.form.get('language', 'eng')
                 threshold = int(request.form.get('threshold', 128))
                 segmentation_mode = int(
                     request.form.get('segmentation_mode', 6))
 
-                # Perform OCR here and store the result in the 'ocr_result' variable
+                # perform OCR and store the result
                 ocr_result = perform_ocr(
                     image_path, language, threshold, segmentation_mode)
 
@@ -242,7 +240,7 @@ def crop_image_route():
             if crop_image.crop_image(input_path, output_path, coordinates):
                 return send_file(output_path, as_attachment=True)
 
-    # If cropping is not successful or there is no image uploaded, it will reach here
+    # if cropping not successful/no image uploaded
     return render_template('crop_image.html', cropping_result='Cropping failed')
 
 
@@ -257,25 +255,25 @@ def convert_file_route():
                 app.config['UPLOAD_FOLDER'], input_file.filename)
             input_file.save(input_path)
 
-            # Get the selected input and output formats from the form
+            # Get input and output
             input_format = request.form.get('input_format', 'png')
             output_format = request.form.get('output_format', 'png')
 
-            # Generate the output filename with the selected output format
+            # generate output filename
             output_filename = f'converted_file.{output_format}'
 
-            # Set the output file path
+            # output file path
             output_path = os.path.join(
                 app.config['UPLOAD_FOLDER'], output_filename)
 
-            # Call the conversion function from the file_conversion module
+            # call conversion function
             success = file_conversion.convert_file(
                 input_path, output_path, input_format, output_format)
 
             if success:
                 return send_file(output_path, as_attachment=True)
 
-    # If conversion is not successful or there is no file uploaded, it will reach here
+    # if conversion unsuccessful/no file uploaded
     return render_template('conversion.html', conversion_result='Conversion failed')
 
 
@@ -284,10 +282,16 @@ def convert_file_route():
 def store_feedback_route():
     feedback = request.form['feedback']
 
-    # Call the function to store feedback
+    # call the function
     feedback_data = feedback_support.store_feedback(feedback)
 
     return jsonify({"feedback_data": feedback_data})
+
+
+# 404 Error Page
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 
 if __name__ == '__main__':

@@ -3,121 +3,14 @@
 <head>
     <title>Watermark the PDF</title>
     <link rel="icon" type="image/x-icon" href="/static/Favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='layout.css') }}">
     <style>
-        body {
-            background-color: #eff7ff;
-            font-family: 'Helvetica', sans-serif;
-            padding: 0;
-            margin: 0;
-            font-size: medium;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Reset default styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* container */
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #F6F8FA;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-            margin: 20px;
-            width: 95%;
-            height: 60vh;
-            font-family: 'Roboto', sans-serif; /* Use Roboto font */
-        }
-
-        /* left sections */
-        .left-section {
-            flex: 1;
-            text-align: center;
-            font-size: 24px; /* Increased font size */
-            font-weight: bold; /* Make heading bold */
-            color: #333333; /* Set font color */
-        }
-
-        /* right section */
-        .right-section {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Watermark PDF form styles */
-        .container form {
-            text-align: center;
-            max-width: 45%;
-            margin: 0 auto;
-        }
-
-        .container img {
-            max-width: 100%;
-            height: auto;
-            max-width: 45%;
-            border: 4px solid tomato; /* Add a 4px tomato-colored border */
-            border-radius: 4px; /* Add a 4px border radius */
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-size: 20px;
-            color: #333333;
-        }
 
         #form_h2{
             font-size: 22px;
             color: tomato;
         }
 
-        input[type="file"] {
-            background-color: #f5f5f5;
-            border: 1px solid #aaa9a9;
-            color: #333333; /* Set font color */
-            padding: 10px;
-            border-radius: 5px;
-            width: 100%;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        input[type="submit"] {
-            background-color: #007acc;
-            font-size: 20px;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #005b9f;
-        }
-
-        p a {
-            color: #228B22;
-            text-decoration: none;
-            border-bottom: 2px solid #228B22;
-            font-size: 16px;
-        }
-
-        p a:hover {
-            border-bottom: 2px solid #005b9f;
-        }
     </style>
 </head>
 <body>
@@ -138,7 +31,7 @@
             </form>
         </div>
         <div class="right-section">
-            <img src="your-image.jpg" alt="example image">
+            <img src="{{ url_for('static', filename='function.jpg') }}" alt="watermark">
         </div>
     </div>
 </body>

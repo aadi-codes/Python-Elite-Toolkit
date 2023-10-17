@@ -10,14 +10,16 @@ body {
     font-size: medium;
 }
 
-/* Reset default styles */
+/* reset default */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* about section start here */
+
+
+/* about section */
 .container_about {
     display: flex;
     justify-content: space-between;
@@ -74,7 +76,7 @@ body {
 
 
 
-/* function section start here */
+/* function section */
 #functions {
     justify-content: space-between;
     align-items: center;
@@ -134,7 +136,7 @@ body {
     justify-content: center;
     text-align: center;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 22px;
     text-decoration: none;
     color: #333333;
     transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
@@ -146,17 +148,50 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: tomato;
     top: 0;
     left: 0;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    z-index: -1;
+    z-index: 1;
     border-radius: 10px;
 }
 
+#box1::before {
+    background: url(./Box1.png); 
+    background-size: cover;
+}
+#box2::before {
+    background: url(./Box2.png); 
+    background-size: cover;
+}
+#box3::before {
+    background: url(./Box3.png); 
+    background-size: cover;
+}
+#box4::before {
+    background: url(./Box4.png); 
+    background-size: cover;
+}
+#box5::before {
+    background: url(./Box5.png); 
+    background-size: cover;
+}
+#box6::before {
+    background: url(./Box6.png); 
+    background-size: cover;
+}
+#box7::before {
+    background: url(./Box7.png); 
+    background-size: cover;
+}
+#box8::before {
+    background: url(./Box8.png); 
+    background-size: cover;
+}
+
+
 .box:hover::before {
-    opacity: 0.8;
+    opacity: 1;
 }
 
 .box:hover {
@@ -171,6 +206,7 @@ body {
 .image-section {
     background: #FEF3E0;
 }
+
 
 
 /* responsive */
