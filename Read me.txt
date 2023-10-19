@@ -21,3 +21,4 @@ To initiate these Python tools, kindly follow these steps:
   
 
 - Alternatively, if you have multiple Python versions installed, consider using: python5 app.py
+- You have to setup tesseract to you system to make it work, i have provided you with the all files in this git-repo 

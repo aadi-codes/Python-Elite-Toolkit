@@ -2,18 +2,15 @@
 <html>
 <head>
     <title>Image Editor</title>
-    <link rel="icon" type="image/x-icon" href="/static/Favicon.ico">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='Favicon.ico') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='layout.css') }}">
     <style>
-
         h1 {
             color: #800000;
         }
-
-        h2,hr {
+        h2, hr {
             border-color: #800000;
         }
-
     </style>
 </head>
 <body>
@@ -26,16 +23,23 @@
             <form action="/image_editor" method="POST" enctype="multipart/form-data">
                 <label for="image_file">Upload Image:</label>
                 <input type="file" id="image_file" name="image_file" required>
-                
-                    <div>
-                        <label for="operation">Choose an Operation:</label>
-                        <select id="operation" name="operation" required>
-                            <option value="resize">Resize</option>
-                            <option value="rotate">Rotate</option>
-                            <option value="sharpen">Sharpen</option>
-                            <option value="brightness">Enhance Brightness</option>
-                        </select>
-                    </div>
+
+                <div>
+                    <label for="operation">Choose an Operation:</label>
+                    <select id="operation" name="operation" required>
+                        <option value="resize">Resize</option>
+                        <option value="rotate">Rotate</option>
+                        <option value="sharpen">Sharpen</option>
+                        <option value="brightness">Enhance Brightness</option>
+                        <option value="contrast">Enhance Contrast</option>
+                        <option value="grayscale">Convert to Grayscale</option>
+                        <option value="horizontal_flip">Horizontal Flip</option>
+                        <option value="vertical_flip">Vertical Flip</option>
+                        <option value="sepia_filter">Apply Sepia Filter</option>
+                        <option value="grayscale_with_custom_threshold">Grayscale with Custom Threshold</option>
+                        <option value="invert_colors">Invert Colors</option>
+                    </select>
+                </div>
                 <br>
                 <input type="submit" value="Apply">
             </form>
@@ -45,10 +49,14 @@
         </div>
     </div>
 
-    {% if edited_image %}
-    <hr>
-    <h2>Edited Image:</h2>
-    <p><a href="{{ edited_image }}" download="edited_image.png">Download Edited Image</a></p>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flash-messages">
+        {% for category, message in messages %}
+          <li class="flash-{{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
     {% endif %}
+  {% endwith %}  
 </body>
 </html>

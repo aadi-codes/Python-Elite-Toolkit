@@ -1,7 +1,5 @@
 from PIL import Image
 
-# Convert from PNG to other formats
-
 
 def convert_png_to_jpeg(input_file, output_file):
     try:
@@ -19,8 +17,6 @@ def convert_png_to_gif(input_file, output_file):
         return True
     except Exception as e:
         return str(e)
-
-# Convert from JPEG to other formats
 
 
 def convert_jpeg_to_png(input_file, output_file):
@@ -40,8 +36,6 @@ def convert_jpeg_to_gif(input_file, output_file):
     except Exception as e:
         return str(e)
 
-# Convert from GIF to other formats
-
 
 def convert_gif_to_png(input_file, output_file):
     try:
@@ -59,3 +53,13 @@ def convert_gif_to_jpeg(input_file, output_file):
         return True
     except Exception as e:
         return str(e)
+
+
+convert_file = {
+    ('png', 'jpeg'): convert_png_to_jpeg,
+    ('png', 'gif'): convert_png_to_gif,
+    ('jpeg', 'png'): convert_jpeg_to_png,
+    ('jpeg', 'gif'): convert_jpeg_to_gif,
+    ('gif', 'png'): convert_gif_to_png,
+    ('gif', 'jpeg'): convert_gif_to_jpeg,
+}

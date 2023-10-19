@@ -20,24 +20,34 @@
         <div class="left-section">
             <h1>Compress your File here</h1>
             <form action="/compress" method="POST" enctype="multipart/form-data">
-                <label id="form_h2" for="file">Select File to Compress:</label>
-                <input type="file" id="file" name="file" required>
+                <label id="form_h2" for="input_file">Select File to Compress:</label>
+                <input type="file" id="input_file" name="input_file" required>
                 <br>
                 <br>        
                 <label for="compression_level">Select Compression Level:</label>
                 <select id="compression_level" name="compression_level" required>
-                    <option value="1">Low</option>
-                    <option value="2">Medium</option>
-                    <option value="3">High</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
                 </select>
                 <br>
                 <br>
                 <input type="submit" value="Compress File">
-            </form>
+            </form>            
         </div>
         <div class="right-section">
             <img src="{{ url_for('static', filename='function.jpg') }}" alt="compress">
         </div>
     </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flash-messages">
+        {% for category, message in messages %}
+          <li class="flash-{{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}      
 </body>
 </html>

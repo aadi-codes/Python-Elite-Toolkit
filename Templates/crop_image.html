@@ -3,7 +3,7 @@
 <head>
     <title>Image Cropping</title>
     <link rel="icon" type="image/x-icon" href="/static/Favicon.ico">
-    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='layout.css') }}">
     <style>
       
         h1 {
@@ -65,10 +65,15 @@
             <img src="{{ url_for('static', filename='function.jpg') }}" alt="crop_image">
         </div>
     </div>
-    {% if cropped_image %}
-    <hr>
-    <h2>Cropped Image:</h2>
-    <img src="{{ cropped_image }}" alt="Cropped Image" class="cropped-image">
-    {% endif %}
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class="flash-messages">
+            {% for category, message in messages %}
+              <li class="flash-{{ category }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}      
 </body>
 </html>

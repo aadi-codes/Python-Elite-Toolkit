@@ -39,25 +39,7 @@
                 <label for="image_file">Upload Image:</label>
                 <input type="file" id="image_file" name="image_file" required>
                 <br>
-                <label for="language">Language :</label>
-                <select id="language" name="language">
-                    <option value="eng">English</option>
-                    <option value="spa">Spanish</option>
-                </select>
-                <br>
-                <label for="threshold">Threshold:</label>
-                <select id="threshold" name="threshold">
-                    <option value="128">Default (128)</option>
-                    <option value="100">Custom Threshold 1 (100)</option>
-                    <option value="150">Custom Threshold 2 (150)</option>
-                </select>
-                <br>
-                <label for="segmentation_mode">Segmentation :</label>
-                <select id="segmentation_mode" name="segmentation_mode">
-                    <option value="6">Automatic (6)</option>
-                    <option value="8">Single Block (8)</option>
-                    <option value="10">Single Line (10)</option>
-                </select>
+               <label for="ocr-results">With Default Value</label>
                 <br>
                 <input type="submit" value="Perform OCR">
             </form>
@@ -66,11 +48,14 @@
             <img src="{{ url_for('static', filename='function.jpg') }}" alt="OCR">
         </div>
     </div>
-    {% if ocr_result %}
-    <hr>
-    <h2>OCR Result:</h2>
-    <p>{{ ocr_result }}</p>
-    {% endif %}
+    <div class="ocr-results">
+        <h2>OCR Result:</h2>
+        {% if ocr_result %}
+        <pre>{{ ocr_result }}</pre>
+        {% else %}
+        <p>No OCR result available yet.</p>
+        {% endif %}
+    </div>
 </body>
 
 </html>

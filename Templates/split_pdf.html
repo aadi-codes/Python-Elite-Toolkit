@@ -39,12 +39,15 @@
         </div>
     </div>
 
-    {% if split_output %}
-    <hr>
-    <h2>Split PDF Pages:</h2>
-    <!-- 'show download' section -->
-    <p><a href="{{ split_output }}" download="split_pdf.pdf">Download Split PDF</a></p>
-    <!-- End of 'show download' section -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <ul class="flash-messages">
+        {% for category, message in messages %}
+          <li class="flash-{{ category }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
     {% endif %}
+  {% endwith %}
+  
 </body>
 </html>

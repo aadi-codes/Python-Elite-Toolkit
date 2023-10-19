@@ -21,18 +21,29 @@
     <!-- navbar  -->
         {% include "navbar.html" %}
 
-    <div class="container">
-        <div class="left-section">
-            <h1>Merge your PDF here</h1>
-            <form action="/merge" method="POST" enctype="multipart/form-data">
-                <label id="form_h2" for="pdfs">Upload all your PDF Files:</label>
-                <input type="file" id="pdfs" name="pdfs" placeholder="Upload" multiple>
-                <input type="submit" value="Merge PDFs">
-            </form>
+        <div class="container">
+            <div class="left-section">
+                <h1>Merge your PDF here</h1>
+                <form action="/merge" method="POST" enctype="multipart/form-data">
+                    <label id="form_h2" for="pdfs">Upload all your PDF Files:</label>
+                    <input type="file" id="pdfs" name="pdfs" placeholder="Upload" multiple required>
+                    <input type="submit" value="Merge PDFs">
+                </form> 
+            </div>
+            <div class="right-section">
+                <img src="{{ url_for('static', filename='function.jpg') }}" alt="merge">
+            </div>
         </div>
-        <div class="right-section">
-            <img src="{{ url_for('static', filename='function.jpg') }}" alt="merge">
-        </div>
-    </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class="flash-messages">
+            {% for category, message in messages %}
+              <li class="flash-{{ category }}">{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}      
+        
 </body>
 </html>
