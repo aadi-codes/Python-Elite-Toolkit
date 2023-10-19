@@ -312,14 +312,28 @@ def convert_file_route():
 
 
 # Feedback Route
-@app.route('/store_feedback', methods=['POST'])
-def store_feedback_route():
-    feedback = request.form['feedback']
+@app.route('/feedback', methods=['GET', 'POST'])
+def feedback_route():
+    if request.method == 'POST':
+        feedback = request.form['feedback']
+        feedback_support.store_feedback(feedback)
+        flash("Feedback submitted successfully!", "success")
+        return redirect(url_for('feedback_route'))
 
-    # call the function
-    feedback_data = feedback_support.store_feedback(feedback)
+    return render_template('feedback_form.html')
 
-    return jsonify({"feedback_data": feedback_data})
+# feedback submit
+
+
+@app.route('/submit_feedback', methods=['POST'])
+def submit_feedback():
+    if request.method == 'POST':
+        feedback = request.form['feedback']
+        feedback_support.store_feedback(feedback)
+        flash("Feedback submitted successfully!", "success")
+        return redirect(url_for('feedback_route'))
+    else:
+        return redirect(url_for('feedback_route'))
 
 
 # 404 Error Page

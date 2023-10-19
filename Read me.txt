@@ -21,4 +21,68 @@ To initiate these Python tools, kindly follow these steps:
   
 
 - Alternatively, if you have multiple Python versions installed, consider using: python5 app.py
-- You have to setup tesseract to you system to make it work, i have provided you with the all files in this git-repo 
+
+
+- You have to setup tesseract to you system to make it work, i have provided you with the git-repo for setup tesseract 
+
+Certainly! Here's a step-by-step guide to setting up Tesseract OCR on Windows using the command line:
+
+1. **Install Git:**
+
+   If you don't already have Git installed, you can download and install it from the official website: [Git Downloads](https://git-scm.com/downloads).
+
+2. Install CMake:
+
+   Download and install CMake from the official website: [CMake Downloads](https://cmake.org/download/).
+
+3. Clone Tesseract Repository
+
+   Open your command prompt and navigate to the directory where you want to clone Tesseract. Then, run the following command to clone the Tesseract repository from GitHub:
+
+   ```
+   git clone https://github.com/tesseract-ocr/tesseract.git
+   ```
+
+5. Build Tesseract
+
+   Navigate to the Tesseract repository directory and create a new directory called "build" (or any name you prefer) to build Tesseract in a separate folder.
+
+   ```
+   mkdir build
+   ```
+
+   ```
+   cd build
+   cmake 
+
+   This command will generate the build files.
+
+6. Build Tesseract Using CMake:
+
+   After generating the build files with CMake, you can build Tesseract using the following command:
+
+   ```
+   cmake --build . --config Release
+
+   This will compile and build the Tesseract OCR engine.
+
+7. Install Tesseract:
+
+   Once the build is complete, you can install Tesseract on your system:
+
+   ```
+   cmake --build . --config Release --target install
+
+
+8. Verify Installation:
+
+   To check if Tesseract is correctly installed, open a new command prompt and run:
+
+```
+   tesseract --version
+
+   You should see the Tesseract OCR version information.
+
+9. Set Environment Variables (Optional):
+
+   If you want to use Tesseract without specifying the full path, you can add Tesseract's "bin" directory to your system's PATH environment variable.

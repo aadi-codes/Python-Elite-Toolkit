@@ -1,4 +1,3 @@
-# feedback_support.py
 feedback_data = []
 
 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback for Python Tools</title>
+    <link rel="icon" type="image/x-icon" href="/static/Favicon.ico">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='layout.css') }}">
+    <style>
+        #form_h2 {
+            font-size: 22px;
+            color: tomato;
+        }
+        hr {
+            border-color: #007acc;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    {% include "navbar.html" %}
+
+    <div class="container">
+        <div class="left-section">
+            <h1>Feedback for Python Tools</h1>
+            <form action="/submit_feedback" method="POST">
+                <label id="form_h2" for="feedback">Your Feedback:</label>
+                <textarea id="feedback" name="feedback" placeholder="Enter your feedback" rows="5" required></textarea>
+                <input type="submit" value="Submit Feedback">
+            </form>
+        </div>
+        <div class="right-section">
+            <img src="{{ url_for('static', filename='function.jpg') }}" alt="Python Tools">
+        </div>
+    </div>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flash-messages">
+                {% for category, message in messages %}
+                    <li class="flash-{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
