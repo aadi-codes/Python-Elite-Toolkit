@@ -10,7 +10,7 @@
 
 The integration of these tools has resulted in the creation of web applications, seamlessly merging the functionality of webpages with Python code, all orchestrated through the Flask framework. Additionally, a custom 404 error page has been thoughtfully designed to enhance user experience.
 
-
+# run "requirements.py" to install all importatnt libs in your environment
 
 #How to Run
 
